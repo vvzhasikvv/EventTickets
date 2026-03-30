@@ -15,7 +15,6 @@ const Home = () => {
           </p>
           <div className="hero__actions">
             <Button to="/events">Browse events</Button>
-            <Link className="link" to="/register">Create account</Link>
           </div>
         </div>
         <div className="hero__panel">
