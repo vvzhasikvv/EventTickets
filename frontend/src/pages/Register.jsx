@@ -1,5 +1,9 @@
 ﻿import { useState } from "react";
 import { register } from "../services/eventService.js";
+import Button from "../components/ui/Button.jsx";
+import Input from "../components/ui/Input.jsx";
+import Alert from "../components/ui/Alert.jsx";
+import Container from "../components/ui/Container.jsx";
 
 const Register = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -23,25 +27,42 @@ const Register = () => {
   };
 
   return (
-    <section className="auth">
-      <h2>Register</h2>
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input name="name" type="text" value={form.name} onChange={handleChange} required />
-        </label>
-        <label>
-          Email
-          <input name="email" type="email" value={form.email} onChange={handleChange} required />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" value={form.password} onChange={handleChange} required />
-        </label>
-        <button className="button" type="submit">Create account</button>
-        {error && <p className="form__error">{error}</p>}
-        {success && <p className="form__success">Account created. You can log in now.</p>}
-      </form>
+    <section className="page-section auth">
+      <Container>
+        <div className="auth__panel">
+          <h2>Create your account</h2>
+          <p>Join Evently to access exclusive event tickets.</p>
+          <form className="form" onSubmit={handleSubmit}>
+            <Input
+              label="Name"
+              name="name"
+              type="text"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Password"
+              name="password"
+              type="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <Button type="submit">Create account</Button>
+          </form>
+          {error && <Alert type="error">{error}</Alert>}
+          {success && <Alert type="success">Account created. You can log in now.</Alert>}
+        </div>
+      </Container>
     </section>
   );
 };

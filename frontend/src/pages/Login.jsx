@@ -1,5 +1,9 @@
 ﻿import { useState } from "react";
 import { login } from "../services/eventService.js";
+import Button from "../components/ui/Button.jsx";
+import Input from "../components/ui/Input.jsx";
+import Alert from "../components/ui/Alert.jsx";
+import Container from "../components/ui/Container.jsx";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -23,21 +27,34 @@ const Login = () => {
   };
 
   return (
-    <section className="auth">
-      <h2>Login</h2>
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input name="email" type="email" value={form.email} onChange={handleChange} required />
-        </label>
-        <label>
-          Password
-          <input name="password" type="password" value={form.password} onChange={handleChange} required />
-        </label>
-        <button className="button" type="submit">Login</button>
-        {error && <p className="form__error">{error}</p>}
-        {success && <p className="form__success">Logged in successfully.</p>}
-      </form>
+    <section className="page-section auth">
+      <Container>
+        <div className="auth__panel">
+          <h2>Welcome back</h2>
+          <p>Log in to manage bookings and discover events.</p>
+          <form className="form" onSubmit={handleSubmit}>
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <Input
+              label="Password"
+              name="password"
+              type="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <Button type="submit">Login</Button>
+          </form>
+          {error && <Alert type="error">{error}</Alert>}
+          {success && <Alert type="success">Logged in successfully.</Alert>}
+        </div>
+      </Container>
     </section>
   );
 };
