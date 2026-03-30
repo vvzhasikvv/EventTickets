@@ -30,6 +30,9 @@ const Navbar = () => {
         <nav className={`navbar__links ${open ? "navbar__links--open" : ""}`}>
           <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
           <NavLink to="/events" onClick={closeMenu}>Events</NavLink>
+          {isAuthenticated && (
+            <NavLink to="/bookings" onClick={closeMenu}>My bookings</NavLink>
+          )}
         </nav>
 
         <div className={`navbar__actions ${open ? "navbar__actions--open" : ""}`}>
