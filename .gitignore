@@ -1,0 +1,24 @@
+﻿# Node
+node_modules/
+
+# Env
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# Build
+/dist/
+/frontend/dist/
+
+# Vite
+frontend/.vite/
+
+# Uploads
+backend/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
