@@ -493,3 +493,7 @@ p {
     padding: var(--space-6) 0 var(--space-7);
   }
 }
+.navbar__user {
+  font-weight: 500;
+  color: var(--color-text);
+}

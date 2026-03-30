@@ -6,6 +6,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Navbar from "./components/Navbar.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 
 const App = () => {
   return (
@@ -18,6 +19,17 @@ const App = () => {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <div className="page-section container">
+                  <h2>Account</h2>
+                  <p className="text-muted">Protected area placeholder.</p>
+                </div>
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
