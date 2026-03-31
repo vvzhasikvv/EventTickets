@@ -1,12 +1,15 @@
 ﻿import Card from "./ui/Card.jsx";
 import Button from "./ui/Button.jsx";
+import { withApiBase } from "../utils/media.js";
 
 const EventCard = ({ event, onClick }) => {
+  const imageUrl = event.coverImageUrl ? withApiBase(event.coverImageUrl) : null;
+
   return (
     <Card className="event-card" onClick={onClick} role={onClick ? "button" : undefined}>
       <div className="event-card__media">
-        {event.coverImageUrl ? (
-          <img src={event.coverImageUrl} alt={event.title} />
+        {imageUrl ? (
+          <img src={imageUrl} alt={event.title} />
         ) : (
           <div className="event-card__placeholder" />
         )}
@@ -18,8 +21,8 @@ const EventCard = ({ event, onClick }) => {
         </div>
         <h3>{event.title}</h3>
         <div className="event-card__footer">
-          <span className="event-card__price">${event.price}</span>
-          <Button variant="ghost" size="sm">Details</Button>
+          <span className="event-card__price">{event.price} ₸</span>
+          <Button variant="ghost" size="sm">Подробнее</Button>
         </div>
       </div>
     </Card>

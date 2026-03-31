@@ -7,6 +7,7 @@ import Spinner from "../components/ui/Spinner.jsx";
 import Container from "../components/ui/Container.jsx";
 import Alert from "../components/ui/Alert.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
+import { withApiBase } from "../utils/media.js";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -30,15 +31,15 @@ const EventDetails = () => {
     setErrorMsg(null);
     try {
       await createBooking({ eventId: id, quantity: 1 });
-      setMessage("Ticket booked successfully.");
+      setMessage("Билет успешно забронирован.");
     } catch (err) {
       const status = err?.response?.status;
       if (status === 409) {
-        setErrorMsg("You have already booked this event.");
+        setErrorMsg("Вы уже бронировали это событие.");
       } else if (status === 401) {
-        setErrorMsg("Please log in to book a ticket.");
+        setErrorMsg("Войдите, чтобы забронировать билет.");
       } else {
-        setErrorMsg("Booking failed. Please try again.");
+        setErrorMsg("Не удалось забронировать. Попробуйте снова.");
       }
     } finally {
       setActionLoading(false);
@@ -46,15 +47,17 @@ const EventDetails = () => {
   };
 
   if (loading) return <Spinner />;
-  if (error) return <p className="text-muted">Failed to load event.</p>;
-  if (!event) return <p className="text-muted">Event not found.</p>;
+  if (error) return <p className="text-muted">Не удалось загрузить событие.</p>;
+  if (!event) return <p className="text-muted">Событие не найдено.</p>;
+
+  const imageUrl = event.coverImageUrl ? withApiBase(event.coverImageUrl) : null;
 
   return (
     <section className="page-section">
       <Container className="details">
         <div className="details__media">
-          {event.coverImageUrl ? (
-            <img src={event.coverImageUrl} alt={event.title} />
+          {imageUrl ? (
+            <img src={imageUrl} alt={event.title} />
           ) : (
             <div className="details__placeholder" />
           )}
@@ -64,25 +67,25 @@ const EventDetails = () => {
           <h2>{event.title}</h2>
           <p>{event.description}</p>
           <ul className="details__list">
-            <li>Location: {event.location}</li>
-            <li>Starts: {new Date(event.startDate).toLocaleString()}</li>
-            <li>Ends: {new Date(event.endDate).toLocaleString()}</li>
-            <li>Price: ${event.price}</li>
-            <li>Available: {event.availableTickets}</li>
+            <li>Локация: {event.location}</li>
+            <li>Начало: {new Date(event.startDate).toLocaleString()}</li>
+            <li>Окончание: {new Date(event.endDate).toLocaleString()}</li>
+            <li>Цена: {event.price} ₸</li>
+            <li>Доступно: {event.availableTickets}</li>
           </ul>
           <div className="details__actions">
             <Button
               onClick={handleBooking}
               disabled={actionLoading || alreadyBooked || !isAuthenticated || bookingsLoading}
             >
-              {alreadyBooked ? "Already booked" : actionLoading ? "Booking..." : "Book ticket"}
+              {alreadyBooked ? "Уже забронировано" : actionLoading ? "Бронируем..." : "Забронировать билет"}
             </Button>
-            <Button variant="secondary">Share</Button>
+            <Button variant="secondary">Поделиться</Button>
           </div>
           {message && <Alert type="success">{message}</Alert>}
           {errorMsg && <Alert type="error">{errorMsg}</Alert>}
           {!isAuthenticated && (
-            <Alert type="error">Log in to book a ticket.</Alert>
+            <Alert type="error">Войдите, чтобы забронировать билет.</Alert>
           )}
         </div>
       </Container>

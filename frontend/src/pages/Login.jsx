@@ -16,8 +16,8 @@ const Login = () => {
 
   const validate = () => {
     const errors = {};
-    if (!form.email) errors.email = "Email is required";
-    if (!form.password) errors.password = "Password is required";
+    if (!form.email) errors.email = "Введите email";
+    if (!form.password) errors.password = "Введите пароль";
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -37,7 +37,7 @@ const Login = () => {
       await login(form);
       setSuccess(true);
     } catch (err) {
-      setError("Invalid credentials");
+      setError("Неверный email или пароль");
     } finally {
       setLoading(false);
     }
@@ -47,11 +47,11 @@ const Login = () => {
     <section className="page-section auth">
       <Container>
         <div className="auth__panel">
-          <h2>Welcome back</h2>
-          <p>Log in to manage bookings and discover events.</p>
+          <h2>С возвращением</h2>
+          <p>Войдите, чтобы управлять бронированиями и находить события.</p>
           <form className="form" onSubmit={handleSubmit}>
             <Input
-              label="Email"
+              label="Эл. почта"
               name="email"
               type="email"
               value={form.email}
@@ -61,7 +61,7 @@ const Login = () => {
               error={fieldErrors.email}
             />
             <Input
-              label="Password"
+              label="Пароль"
               name="password"
               type="password"
               value={form.password}
@@ -71,11 +71,11 @@ const Login = () => {
               error={fieldErrors.password}
             />
             <Button type="submit" disabled={loading}>
-              {loading ? "Signing in..." : "Login"}
+              {loading ? "Входим..." : "Войти"}
             </Button>
           </form>
           {error && <Alert type="error">{error}</Alert>}
-          {success && <Alert type="success">Logged in successfully.</Alert>}
+          {success && <Alert type="success">Вы успешно вошли.</Alert>}
         </div>
       </Container>
     </section>

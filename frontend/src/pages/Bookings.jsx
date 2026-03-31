@@ -9,23 +9,29 @@ import { fetchMyBookings } from "../services/eventService.js";
 const Bookings = () => {
   const { data: bookings, loading, error } = useAsync(fetchMyBookings, []);
 
+  const statusLabels = {
+    confirmed: "подтверждено",
+    pending: "в ожидании",
+    cancelled: "отменено"
+  };
+
   return (
     <section className="page-section">
       <Container>
         <div className="page-header">
           <div>
-            <h2>My bookings</h2>
-            <p>All your confirmed tickets in one place.</p>
+            <h2>Мои брони</h2>
+            <p>Все ваши билеты в одном месте.</p>
           </div>
         </div>
 
         {loading && <Spinner />}
-        {error && <Alert type="error">Failed to load bookings.</Alert>}
+        {error && <Alert type="error">Не удалось загрузить бронирования.</Alert>}
 
         {!loading && !error && bookings?.length === 0 && (
           <EmptyState
-            title="No bookings yet"
-            description="Once you book a ticket it will show up here."
+            title="Пока нет бронирований"
+            description="Когда вы забронируете билет, он появится здесь."
           />
         )}
 
@@ -34,15 +40,17 @@ const Bookings = () => {
             {bookings.map((booking) => (
               <Card key={booking._id} className="booking-card">
                 <div className="booking-card__body">
-                  <h3>{booking.eventId?.title || "Event"}</h3>
+                  <h3>{booking.eventId?.title || "Событие"}</h3>
                   <p className="text-muted">
                     {booking.eventId?.location} · {new Date(booking.eventId?.startDate).toLocaleString()}
                   </p>
                   <div className="booking-card__meta">
-                    <span>Tickets: {booking.quantity}</span>
-                    <span>Total: ${booking.totalPrice}</span>
+                    <span>Билеты: {booking.quantity}</span>
+                    <span>Итого: {booking.totalPrice} ₸</span>
                   </div>
-                  <span className={`status status--${booking.status}`}>{booking.status}</span>
+                  <span className={`status status--${booking.status}`}>
+                    {statusLabels[booking.status] || booking.status}
+                  </span>
                 </div>
               </Card>
             ))}

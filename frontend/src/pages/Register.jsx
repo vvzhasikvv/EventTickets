@@ -15,10 +15,10 @@ const Register = () => {
 
   const validate = () => {
     const errors = {};
-    if (!form.name) errors.name = "Name is required";
-    if (!form.email) errors.email = "Email is required";
+    if (!form.name) errors.name = "Введите имя";
+    if (!form.email) errors.email = "Введите email";
     if (!form.password || form.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
+      errors.password = "Пароль должен быть не менее 6 символов";
     }
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -39,7 +39,7 @@ const Register = () => {
       await register(form);
       setSuccess(true);
     } catch (err) {
-      setError("Registration failed");
+      setError("Не удалось зарегистрироваться");
     } finally {
       setLoading(false);
     }
@@ -49,11 +49,11 @@ const Register = () => {
     <section className="page-section auth">
       <Container>
         <div className="auth__panel">
-          <h2>Create your account</h2>
-          <p>Join Evently to access exclusive event tickets.</p>
+          <h2>Создайте аккаунт</h2>
+          <p>Присоединяйтесь к Evently, чтобы бронировать билеты.</p>
           <form className="form" onSubmit={handleSubmit}>
             <Input
-              label="Name"
+              label="Имя"
               name="name"
               type="text"
               value={form.name}
@@ -63,7 +63,7 @@ const Register = () => {
               error={fieldErrors.name}
             />
             <Input
-              label="Email"
+              label="Эл. почта"
               name="email"
               type="email"
               value={form.email}
@@ -73,7 +73,7 @@ const Register = () => {
               error={fieldErrors.email}
             />
             <Input
-              label="Password"
+              label="Пароль"
               name="password"
               type="password"
               value={form.password}
@@ -83,11 +83,11 @@ const Register = () => {
               error={fieldErrors.password}
             />
             <Button type="submit" disabled={loading}>
-              {loading ? "Creating..." : "Create account"}
+              {loading ? "Создание..." : "Создать аккаунт"}
             </Button>
           </form>
           {error && <Alert type="error">{error}</Alert>}
-          {success && <Alert type="success">Account created. You can log in now.</Alert>}
+          {success && <Alert type="success">Аккаунт создан. Теперь можно войти.</Alert>}
         </div>
       </Container>
     </section>

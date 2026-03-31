@@ -7,38 +7,35 @@ const Home = () => {
     <section className="hero">
       <Container className="hero__inner">
         <div className="hero__copy">
-          <span className="tag">New season</span>
-          <h1>Book standout events in minutes.</h1>
+          <span className="tag">Главное</span>
+          <h1>Бронируйте лучшие события за минуты.</h1>
           <p>
-            Discover curated experiences, reserve tickets instantly, and keep all your
-            events organized in one place.
+            Открывайте отобранные события, бронируйте билеты мгновенно и храните всё
+            в одном месте.
           </p>
           <div className="hero__actions">
-            <Button to="/events">Browse events</Button>
+            <Button to="/events">Смотреть события</Button>
           </div>
         </div>
         <div className="hero__panel">
           <div className="hero__card">
-            <h3>Tonight at 8:00 PM</h3>
-            <p>Design Leadership Summit</p>
+            <h3>Сегодня в 17:00</h3>
+            <p>Наурыз</p>
             <div className="hero__meta">
-              <span>Online</span>
-              <span>$49</span>
+              <span>Билеты продаются</span>
+              <span>2500 ₸</span>
             </div>
           </div>
           <div className="hero__stats">
             <div>
-              <strong>240+</strong>
-              <span>Events</span>
+              <strong>Смотрите</strong>
+              <span>События</span>
             </div>
             <div>
-              <strong>18k</strong>
-              <span>Tickets</span>
+              <strong>Покупайте</strong>
+              <span>Билеты</span>
             </div>
-            <div>
-              <strong>4.8</strong>
-              <span>Avg rating</span>
-            </div>
+           
           </div>
         </div>
       </Container>

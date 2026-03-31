@@ -18,7 +18,7 @@ const Navbar = () => {
         <button
           className="navbar__toggle"
           type="button"
-          aria-label="Toggle menu"
+          aria-label="Открыть меню"
           aria-expanded={open}
           onClick={() => setOpen((prev) => !prev)}
         >
@@ -28,25 +28,28 @@ const Navbar = () => {
         </button>
 
         <nav className={`navbar__links ${open ? "navbar__links--open" : ""}`}>
-          <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
-          <NavLink to="/events" onClick={closeMenu}>Events</NavLink>
+          <NavLink to="/" end onClick={closeMenu}>Главная</NavLink>
+          <NavLink to="/events" onClick={closeMenu}>События</NavLink>
           {isAuthenticated && (
-            <NavLink to="/bookings" onClick={closeMenu}>My bookings</NavLink>
+            <NavLink to="/bookings" onClick={closeMenu}>Мои брони</NavLink>
+          )}
+          {isAuthenticated && user?.role === "admin" && (
+            <NavLink to="/admin" onClick={closeMenu}>Админ</NavLink>
           )}
         </nav>
 
         <div className={`navbar__actions ${open ? "navbar__actions--open" : ""}`}>
           {isAuthenticated ? (
             <>
-              <span className="navbar__user">Hi, {user?.name || "User"}</span>
+              <span className="navbar__user">Привет, {user?.name || "Пользователь"}</span>
               <Button variant="secondary" size="sm" onClick={() => { logout(); closeMenu(); }}>
-                Logout
+                Выйти
               </Button>
             </>
           ) : (
             <>
-              <NavLink className="navbar__link" to="/login" onClick={closeMenu}>Login</NavLink>
-              <Button to="/register" variant="primary" size="sm" onClick={closeMenu}>Get started</Button>
+              <NavLink className="navbar__link" to="/login" onClick={closeMenu}>Войти</NavLink>
+              <Button to="/register" variant="primary" size="sm" onClick={closeMenu}>Начать</Button>
             </>
           )}
         </div>

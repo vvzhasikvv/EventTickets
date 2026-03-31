@@ -15,18 +15,18 @@ const EventsList = () => {
       <Container>
         <div className="page-header">
           <div>
-            <h2>Upcoming events</h2>
-            <p>Pick your next experience from our featured lineup.</p>
-          </div>
+          <h2>Ближайшие события</h2>
+          <p>Выберите следующее событие из нашей подборки.</p>
         </div>
+      </div>
 
         {loading && <Spinner />}
-        {error && <p className="text-muted">Failed to load events.</p>}
+        {error && <p className="text-muted">Не удалось загрузить события.</p>}
 
         {!loading && !error && events?.length === 0 && (
           <EmptyState
-            title="No events yet"
-            description="Once new events are published they will appear here."
+            title="Пока нет событий"
+            description="Когда появятся новые события, они будут здесь."
           />
         )}
 

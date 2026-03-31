@@ -7,7 +7,10 @@ import Register from "./pages/Register.jsx";
 import Navbar from "./components/Navbar.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import AdminRoute from "./routes/AdminRoute.jsx";
 import Bookings from "./pages/Bookings.jsx";
+import AdminEvents from "./pages/AdminEvents.jsx";
+import Toasts from "./components/ui/Toasts.jsx";
 
 const App = () => {
   return (
@@ -28,9 +31,18 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminEvents />
+              </AdminRoute>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Toasts />
     </div>
   );
 };
